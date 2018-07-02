@@ -18,17 +18,17 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement(speed);
 
-        if (Input.GetKey(KeyCode.Space) && checkBoost()) //If they press space and they have a boost (TRUE)
+        if (Input.GetKey(KeyCode.Space) && checkBoost()) //If they press space and they have a boost (TRUE) //Here is where I implement the boost
         {
             timeLeft -= Time.deltaTime; //Take away 1 second to the timeleft every second
-            Debug.Log(timeLeft.ToString());
+            Debug.Log(timeLeft.ToString()); // Here
             boost();
         }
 
-        if (timeLeft < 0) //If the timeleft is zero them
+        if (timeLeft < 0) //If the timeleft is zero them  // Here
         {
-            Boost = false;
-            timeLeft = 5f; //Reset the time back to 5 seconds.
+            Boost = false; // Here
+            timeLeft = 5f; //Reset the time back to 5 seconds. // Here
         }
     }
 
