@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour 
 {
@@ -8,13 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool Boost;
     public float timeLeft = 5f; //Set the time left to 5 seconds
+    public Text livesText;
+    private int lives;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lives = 3; //Giving the user 3 lives to begin with.
     }
 
-    void FixedUpdate()
+	void Update()
+	{
+        livesText.text = lives.ToString();
+	}
+	void FixedUpdate()
     {
         Movement(speed);
 
@@ -68,6 +76,11 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(50);
             Boost = true;
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            lives--; //Take away one life from the user.
         }
     }
 
