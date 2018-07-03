@@ -71,8 +71,9 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<ScoreManager>().updateScore(50);
         }
 
-        if (other.gameObject.CompareTag("banana")) //if banana is picked up
+        if (other.gameObject.CompareTag("banana")) //if banana is picked up, the player gets a boost.
         {
+            //other.gameObject.SetActive(false);
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(50);
             Boost = true;
@@ -87,11 +88,6 @@ public class PlayerMovement : MonoBehaviour
                 speed = 0f;
             }
         }
-    }
-
-    void unkillable() //orange: make the player unkillable
-    {
-        
     }
 
     void boost() //banana: give the player a boost by pressing space!

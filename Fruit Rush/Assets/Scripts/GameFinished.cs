@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameFinished : MonoBehaviour {
 
@@ -19,11 +17,6 @@ public class GameFinished : MonoBehaviour {
         gameOverText.SetActive(false);
         replayButton.SetActive(false);
 	}
-	
-	public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 
     public void GameOver()
     {

@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour
     private Vector3 playerPosition;
     public Rigidbody rb;
     public GameObject enemy;
-    private Vector3 enemySpawn = new Vector3(0,10,0);
     private float speed = 4.0f;
     public bool check = false;
     void Start()
@@ -29,24 +28,34 @@ public class EnemyController : MonoBehaviour
             other.gameObject.SetActive(false);
             FindObjectOfType<TimeManager>().AddTime(-10); //Minus 10 seconds to the time left
             FindObjectOfType<ScoreManager>().updateScore(-10);
+            increaseEnemy();
         }
 
         if (other.gameObject.CompareTag("orange")) //if orange is picked up, give the user extra 150 points
         {
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(-10);
+            increaseEnemy();
         }
 
         if (other.gameObject.CompareTag("watermelon")) //if watermelon is picked up
         {
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(-10);
+            increaseEnemy();
         }
 
         if (other.gameObject.CompareTag("banana")) //if banana is picked up
         {
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(-10);
+            increaseEnemy();
         }
+    }
+
+    void increaseEnemy()
+    {
+        Vector3 increase = new Vector3(0.5f, 0.5f, 0.5f);
+        enemy.transform.localScale += increase;
     }
 }
