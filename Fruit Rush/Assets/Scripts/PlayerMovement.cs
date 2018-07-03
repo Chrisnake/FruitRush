@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 	{
         livesText.text = lives.ToString();
 	}
+
 	void FixedUpdate()
     {
         Movement(speed);
@@ -29,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && checkBoost()) //If they press space and they have a boost (TRUE) //Here is where I implement the boost
         {
             timeLeft -= Time.deltaTime; //Take away 1 second to the timeleft every second
-            Debug.Log(timeLeft.ToString()); // Here
             boost();
         }
 
@@ -81,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             lives--; //Take away one life from the user.
+            if(lives == 0)
+            {
+                FindObjectOfType<GameFinished>().GameOver();
+                speed = 0f;
+            }
         }
     }
 
@@ -105,6 +110,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return (false);
         }
+    }
+
+    public void stopSpeed()
+    {
+        speed = 0;
     }
 }
 

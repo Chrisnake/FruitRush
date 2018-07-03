@@ -18,8 +18,13 @@ public class ScoreManager : MonoBehaviour {
         Score += newScore;
     }
 
-	void FixedUpdate()
+	void Update()
 	{
         scoreText.text = Score.ToString();
 	}
+
+    public int getScore()
+    {
+        return (Score);  
+    }
 }
