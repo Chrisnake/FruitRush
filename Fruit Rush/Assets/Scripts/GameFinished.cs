@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFinished : MonoBehaviour {
-
+    
     public GameObject gameoverPanel;
     public GameObject finalScore;
-    public GameObject gameOverText;
-    public GameObject replayButton;
+    public GameObject gamestateText;
+    public GameObject buttonState;
 
-	// Use this for initialization
 	void Start () 
     {
         gameoverPanel.SetActive(false);
         finalScore.SetActive(false);
-        gameOverText.SetActive(false);
-        replayButton.SetActive(false);
+        gamestateText.SetActive(false);
+        buttonState.SetActive(false);
 	}
 
     public void GameOver()
     {
         gameoverPanel.SetActive(true);
         finalScore.SetActive(true);
-        gameOverText.gameObject.SetActive(true);
-        replayButton.gameObject.SetActive(true);
+        gamestateText.gameObject.SetActive(true);
+        buttonState.gameObject.SetActive(true);
+    }
+
+    public void GameWon()
+    {
+        gameoverPanel.SetActive(true);
+        finalScore.SetActive(true);
+        gamestateText.gameObject.SetActive(true);
+        buttonState.gameObject.SetActive(true);
     }
 }

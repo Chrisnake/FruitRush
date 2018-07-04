@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour 
+public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-    private Rigidbody rb;
-    private bool Boost;
     public float timeLeft = 5f; //Set the time left to 5 seconds
     public Text livesText;
+    public int totalItems; //The amount of items in this specific level
+    public SceneFader sceneFader;
     private int lives;
+    private Rigidbody rb;
+    private bool Boost;
 
     void Start()
     {
@@ -18,12 +20,18 @@ public class PlayerMovement : MonoBehaviour
         lives = 3; //Giving the user 3 lives to begin with.
     }
 
-	void Update()
-	{
+    void Update()
+    {
         livesText.text = lives.ToString();
-	}
 
-	void FixedUpdate()
+        if(totalItems == 0) //If the user has collected all the items
+        {
+            FindObjectOfType<GameFinished>().GameWon();
+            speed = 0f;
+        }
+    }
+
+    void FixedUpdate()
     {
         Movement(speed);
 
@@ -37,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Boost = false; // Here
             timeLeft = 5f; //Reset the time back to 5 seconds. // Here
+        }
+
+        if (rb.position.y < -30) //If they fall of the map
+        {
+            FindObjectOfType<GameFinished>().GameOver();
         }
     }
 
@@ -57,32 +70,35 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.SetActive(false);
             FindObjectOfType<TimeManager>().AddTime(10); //Add 10 seconds to the time left
             FindObjectOfType<ScoreManager>().updateScore(50);
+            totalItems--;
         }
 
         if (other.gameObject.CompareTag("orange")) //if orange is picked up, give the user extra 150 points
         {
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(200);
+            totalItems--;
         }
 
         if (other.gameObject.CompareTag("watermelon")) //if watermelon is picked up
         {
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(50);
+            totalItems--;
         }
 
         if (other.gameObject.CompareTag("banana")) //if banana is picked up, the player gets a boost.
         {
-            //other.gameObject.SetActive(false);
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(50);
+            totalItems--;
             Boost = true;
         }
 
         if (other.gameObject.CompareTag("Enemy"))
         {
             lives--; //Take away one life from the user.
-            if(lives == 0)
+            if (lives == 0)
             {
                 FindObjectOfType<GameFinished>().GameOver();
                 speed = 0f;
@@ -92,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
 
     void boost() //banana: give the player a boost by pressing space!
     {
-          float BoostSpeed = 15;
-          Movement(BoostSpeed);
+        float BoostSpeed = 15;
+        Movement(BoostSpeed);
     }
 
     bool checkBoost()
