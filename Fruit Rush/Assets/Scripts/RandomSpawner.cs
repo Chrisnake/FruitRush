@@ -6,7 +6,7 @@ public class RandomSpawner : MonoBehaviour
 {
     public GameObject banana, watermelon, orange, lemon;
 
-    public float spawnRate = 2f; //Spawn rate of objects
+    public float spawnRate = 0.5f; //Spawn rate of objects
     private float nextSpawn = 0f;
     float randomX, randomZ; //This needs to be set to max and minimum values of the game board
     int chance; //Ensure there is a random chance that orange is chosen, because I do not want too many oranges showing up.
@@ -29,6 +29,7 @@ public class RandomSpawner : MonoBehaviour
                 {
                     Debug.Log(whatToSpawn.ToString());
                     InstantiateSpawn(chance, randomPosition); //Spawn the orange if it is a 3.
+
                 }
             }
             else

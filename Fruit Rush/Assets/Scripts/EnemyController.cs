@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
     private Vector3 playerPosition;
     public Rigidbody rb;
     public GameObject enemy;
-    private float speed = 4.0f;
-    public bool check = false;
+    public float speed = 4.0f;
+
     void Start()
     {
         player = GameObject.Find("Player"); //At the start of the game the enemy will locate the player object.
@@ -25,31 +25,21 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("lemon")) //If lemon is picked up, add extra time
         {
-            other.gameObject.SetActive(false);
-            FindObjectOfType<TimeManager>().AddTime(-10); //Minus 10 seconds to the time left
-            FindObjectOfType<ScoreManager>().updateScore(-10);
-            increaseEnemy();
+            enemyLogic(other);
         }
-
         if (other.gameObject.CompareTag("orange")) //if orange is picked up, give the user extra 150 points
         {
-            other.gameObject.SetActive(false);
-            FindObjectOfType<ScoreManager>().updateScore(-10);
-            increaseEnemy();
+            enemyLogic(other);
         }
 
         if (other.gameObject.CompareTag("watermelon")) //if watermelon is picked up
         {
-            other.gameObject.SetActive(false);
-            FindObjectOfType<ScoreManager>().updateScore(-10);
-            increaseEnemy();
+            enemyLogic(other);
         }
 
         if (other.gameObject.CompareTag("banana")) //if banana is picked up
         {
-            other.gameObject.SetActive(false);
-            FindObjectOfType<ScoreManager>().updateScore(-10);
-            increaseEnemy();
+            enemyLogic(other);
         }
     }
 
@@ -57,5 +47,19 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 increase = new Vector3(0.5f, 0.5f, 0.5f);
         enemy.transform.localScale += increase;
+    }
+
+    public void stopEnemy()
+    {
+        speed = 0.0f;
+    }
+
+    void enemyLogic(Collider other)
+    {
+        other.gameObject.SetActive(false);
+        FindObjectOfType<ScoreManager>().updateScore(-10);
+        FindObjectOfType<GameLost>().Show();
+        FindObjectOfType<PlayerMovement>().stopSpeed();
+        stopEnemy();
     }
 }
