@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-    private float timeLeft = 5; //Set the time left to 5 seconds for the boost.
     public Text livesText;
     public int totalItems; //The amount of items in this specific level
     public SceneFader sceneFader;
+
     private int lives;
     private Rigidbody rb;
     private bool Boost;
+    private float timeLeft = 5; //Set the time left to 5 seconds for the boost.
 
     void Start()
     {
@@ -73,13 +74,12 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.SetActive(false);
             FindObjectOfType<ScoreManager>().updateScore(200);
             itemCheck();
-
         }
 
         if (other.gameObject.CompareTag("watermelon")) //if watermelon is picked up
         {
             other.gameObject.SetActive(false);
-            FindObjectOfType<ScoreManager>().updateScore(50);
+            FindObjectOfType<ScoreManager>().updateScore(1000);
             itemCheck();
         }
 
