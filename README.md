@@ -10,3 +10,4 @@ I am currently developing another 3D based game on Unity (using C#) called Fruit
 
 I have also implemented 15 levels where the environments change to increase the difficulty. The orange enemy is capable of eating the users fruits and if they do manage to eat a fruit then they get larger and the game ends. The user must therefore learn how to position their character to ensure the enemy does not eat the fruit. Each user gets 3 lives and colliding with the enemy also reduces one of their lives.
 
+![portfolio3](https://user-images.githubusercontent.com/32743122/42899449-f293a074-8abd-11e8-83c4-f17ec92548ec.png)
